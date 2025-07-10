@@ -1,0 +1,63 @@
+header {
+  height: 90px;
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+}
+
+header nav {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+  background-color: white;
+}
+
+nav>img {
+  width: 90px;
+  margin-right: 10px;
+}
+
+nav>h1 {
+  font-weight: 400;
+}
+
+.quiz-app {
+  padding: 20px;
+}
+
+.quiz-app h2 {
+  margin-bottom: 10px;
+}
+
+.quiz-app button {
+  display: block;
+  margin: 8px 0;
+  padding: 10px;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  cursor: pointer;
+  background-color: white;
+  color: black;
+  transition: background-color 0.3s, color 0.3s;
+}
+
+.quiz-app button.correct {
+  background-color: #4CAF50;
+  color: white;
+}
+
+.quiz-app button.incorrect {
+  background-color: #f44336;
+  color: white;
+}
+
+.quiz-app button.dimmed {
+  opacity: 0.6;
+}
+
+.quiz-app button:disabled {
+  cursor: not-allowed;
+}
+
+button {
+  font-family: "Comic Sans MS", "Comic Sans", cursive;
+}
