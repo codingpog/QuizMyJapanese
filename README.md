@@ -1,69 +1,68 @@
-# React + TypeScript + Vite
+# Quiz My Japanese
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+Quiz My Japanese is a React + TypeScript web app that generates multiple-choice reading comprehension quizzes from Japanese text passages using the DeepSeek (OpenAI-compatible) API.
 
-Currently, two official plugins are available:
+![QuizMyJapanese Screenshot](./src/assets/appLogo.png)
 
-- [@vitejs/plugin-react](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react) uses [Babel](https://babeljs.io/) for Fast Refresh
-- [@vitejs/plugin-react-swc](https://github.com/vitejs/vite-plugin-react/blob/main/packages/plugin-react-swc) uses [SWC](https://swc.rs/) for Fast Refresh
+## Features
 
-## Expanding the ESLint configuration
+- Enter a Japanese passage and generate 3 English reading comprehension questions.
+- Each question has 1 correct answer and 3 distractors.
+- Interactive quiz interface with instant feedback and scoring.
+- Built with React, TypeScript, and Vite.
 
-If you are developing a production application, we recommend updating the configuration to enable type-aware lint rules:
+## Getting Started
 
-```js
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
+### Prerequisites
 
-      // Remove tseslint.configs.recommended and replace with this
-      ...tseslint.configs.recommendedTypeChecked,
-      // Alternatively, use this for stricter rules
-      ...tseslint.configs.strictTypeChecked,
-      // Optionally, add this for stylistic rules
-      ...tseslint.configs.stylisticTypeChecked,
+- Node.js (v18+ recommended)
+- An API key for [DeepSeek](https://deepseek.com/) or another OpenAI-compatible provider
 
-      // Other configs...
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+### Installation
+
+1. Clone this repository:
+
+   ```sh
+   git clone https://github.com/yourusername/quizmyjapanese.git
+   cd quizmyjapanese
+   ```
+
+2. Install dependencies:
+
+   ```sh
+   npm install
+   ```
+
+3. Add your API key  
+   Edit [`src/ai.ts`](src/ai.ts) and insert your API key in the `apiKey` field.
+
+### Running the App
+
+Start the development server:
+
+```sh
+npm run dev
 ```
 
-You can also install [eslint-plugin-react-x](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-x) and [eslint-plugin-react-dom](https://github.com/Rel1cx/eslint-react/tree/main/packages/plugins/eslint-plugin-react-dom) for React-specific lint rules:
+Open [http://localhost:5173](http://localhost:5173) in your browser.
 
-```js
-// eslint.config.js
-import reactX from 'eslint-plugin-react-x'
-import reactDom from 'eslint-plugin-react-dom'
+### Building for Production
 
-export default tseslint.config([
-  globalIgnores(['dist']),
-  {
-    files: ['**/*.{ts,tsx}'],
-    extends: [
-      // Other configs...
-      // Enable lint rules for React
-      reactX.configs['recommended-typescript'],
-      // Enable lint rules for React DOM
-      reactDom.configs.recommended,
-    ],
-    languageOptions: {
-      parserOptions: {
-        project: ['./tsconfig.node.json', './tsconfig.app.json'],
-        tsconfigRootDir: import.meta.dirname,
-      },
-      // other options...
-    },
-  },
-])
+```sh
+npm run build
 ```
+
+### Linting
+
+```sh
+npm run lint
+```
+
+## Project Structure
+
+- [`src/App.tsx`](src/App.tsx): Main app component
+- [`src/components/Header.tsx`](src/components/Header.tsx): App header
+- [`src/components/Body.tsx`](src/components/Body.tsx): Handles quiz generation and display
+- [`src/components/Quiz.tsx`](src/components/Quiz.tsx): Quiz UI and logic
+- [`src/ai.ts`](src/ai.ts): Handles API calls to generate quiz questions
+- [`src/types.ts`](src/types.ts): Type definitions
