@@ -2,14 +2,21 @@ import React from "react"
 import type { QuizQuestion } from "../types"
 import Quiz from "./Quiz"
 import Form from "./Form"
+import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader"
 
 function Body(): React.JSX.Element {
   const [quizData, setQuizData] = React.useState<QuizQuestion[]>([])
+  const [loading, setLoading] = React.useState<boolean>(false)
 
   return (
     <main>
-        {quizData.length == 0 && <Form setQuizData={setQuizData} />}
-        {quizData.length > 0 && <Quiz quizData={quizData} />}
+        {quizData.length == 0 && !loading && <Form setQuizData={setQuizData} setLoading={setLoading} />}
+        {loading && ( 
+          <div className="loader-container">
+            <ClimbingBoxLoader color="#009cdf" size={20}/>
+          </div>
+        )}
+        {quizData.length > 0 && !loading && <Quiz quizData={quizData} />}
     </main>
   )
 }
