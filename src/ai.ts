@@ -3,8 +3,8 @@ import type { QuizQuestion } from "./types";
 import OpenAI from "openai";
 
 const openai: OpenAI = new OpenAI({
-  baseURL: "https://api.deepseek.com",
-  apiKey: "sk-7dcad7a5a32c4b3892e199ff71a82e4d", // Insert your API key here
+  baseURL: import.meta.env.VITE_API_URL,
+  apiKey: import.meta.env.VITE_API_KEY, 
   dangerouslyAllowBrowser: true,
 });
 
