@@ -102,9 +102,9 @@ header nav {
   cursor: not-allowed;
 }
 
-button {
-  font-family: "Comic Sans MS", "Comic Sans", cursive;
-}
+/* button {
+  font-family: "A";
+} */
 
 .login-frame {
   display: flex;
