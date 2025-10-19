@@ -4,10 +4,10 @@ import {Link} from "react-router-dom"
 function Header(): React.JSX.Element {
     return (
         <header>
-            <div className="logo">
+            <Link to="/dashboard" className="logo">
                 <img src={appLogo} alt='app-logo'/>
-                <h1>Quiz My Japanese</h1>
-            </div>
+                <h2>Quiz My Japanese</h2>
+            </Link>
             <nav>
                 <Link to="/dashboard">Home</Link>
                 <p>  |  </p>
