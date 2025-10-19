@@ -22,10 +22,10 @@ export async function generateQuiz(text: string): Promise<QuizQuestion[] | undef
     
     ${text}
     
-    Please generate 3 multiple-choice reading comprehension questions in English based on the passage above. Each question should have:
+    Please generate 5 multiple-choice reading comprehension questions in English based on the passage above. Each question should have:
     - One correct answer
     - Three distractor answers
-    - Format: return ONLY a JSON array of 3 objects with "id", "question", "options", and "answer" fields. Do not wrap it in an object. Only return valid JSON.
+    - Format: return ONLY a JSON array of 5 objects with "id", "question", "options", and "answer" fields. Do not wrap it in an object. Only return valid JSON.
             `.trim(),
           },
         ],
