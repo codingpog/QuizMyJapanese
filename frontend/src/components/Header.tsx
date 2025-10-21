@@ -1,10 +1,11 @@
 import appLogo from '../assets/appLogo.png'
-import {Link} from "react-router-dom"
+import {Link, useNavigate} from "react-router-dom"
 
 function Header(): React.JSX.Element {
+    const navigate = useNavigate()
     return (
         <header>
-            <Link to="/dashboard" className="logo">
+            <Link to="/dashboard" className="logo" onClick={() => {navigate(0)}}>
                 <img src={appLogo} alt='app-logo'/>
                 <h2>Quiz My Japanese</h2>
             </Link>

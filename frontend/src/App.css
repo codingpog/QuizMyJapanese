@@ -19,7 +19,6 @@ header {
   justify-content: left;
   align-items: center;
   height: 100%;
-  background-color: white;
   text-decoration: none;  /* no underline */
   color: inherit;   /* no purple color */
 }

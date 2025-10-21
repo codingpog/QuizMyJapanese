@@ -18,7 +18,7 @@ export async function generateQuiz(text: string): Promise<QuizQuestion[] | undef
         {
             role: "user",
             content: `
-    Here is a passage in Japanese:
+    Here is a passage of text:
     
     ${text}
     
