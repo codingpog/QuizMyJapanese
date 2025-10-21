@@ -32,43 +32,42 @@ app.post('/get-article', async (req, res) => {
 })
 
 app.post('/generate-quiz', async (req, res) => { 
-    /*Open connection to OpenAI*/
-    const openai= new OpenAI({
-    baseURL: process.env.VITE_API_URL,
-    apiKey: process.env.VITE_API_KEY, 
-    dangerouslyAllowBrowser: true,
+    try {
+        /*Open connection to OpenAI*/
+        const openai= new OpenAI({
+        baseURL: process.env.VITE_API_URL,
+        apiKey: process.env.VITE_API_KEY, 
+        });
+        const {text} = req.body;
+    const completion = await openai.chat.completions.create({
+        messages: [
+            {
+                role: "system",
+                content: "You are a helpful assistant that generates quizzes based on the provided text.",
+            },
+            {
+                role: "user",
+                content: `
+        Here is a passage of text:
+        
+        ${text}
+        
+        Please generate 5 multiple-choice reading comprehension questions in English based on the passage above. Each question should have:
+        - One correct answer
+        - Three distractor answers
+        - Format: return ONLY a JSON array of 5 objects with "id", "question", "options", and "answer" fields. Do not wrap it in an object. Only return valid JSON.
+                `.trim(),
+            },
+            ],
+        response_format: { type: "json_object" },
+        model: "deepseek-chat",
     });
-    const {text} = req.body;
-  const completion = await openai.chat.completions.create({
-    messages: [
-        {
-            role: "system",
-            content: "You are a helpful assistant that generates quizzes based on the provided text.",
-        },
-        {
-            role: "user",
-            content: `
-    Here is a passage of text:
-    
-    ${text}
-    
-    Please generate 5 multiple-choice reading comprehension questions in English based on the passage above. Each question should have:
-    - One correct answer
-    - Three distractor answers
-    - Format: return ONLY a JSON array of 5 objects with "id", "question", "options", and "answer" fields. Do not wrap it in an object. Only return valid JSON.
-            `.trim(),
-          },
-        ],
-    response_format: { type: "json_object" },
-    model: "deepseek-chat",
-  });
 
-  const rawJSON = completion.choices[0].message.content;
+    const rawJSON = completion.choices[0].message.content;
 
-  try {
-    if (rawJSON) {
-        res.status(200).json(JSON.parse(rawJSON));      
-    }
+        if (rawJSON) {
+            res.status(200).json(JSON.parse(rawJSON));      
+        }
   } catch (error) {
     res.status(500).send('Error getting AI response');
     console.error('Error parsing AI response:', error);
