@@ -1,7 +1,7 @@
 import type { QuizQuestion } from "../types";
 // import {generateQuiz} from "../ai";
 import React from "react"
-import axios, { Axios, AxiosError } from "axios";
+import axios, { AxiosError } from "axios";
 
 type FormProps = {
   setQuizData: React.Dispatch<React.SetStateAction<QuizQuestion[]>>;
