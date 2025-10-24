@@ -58,13 +58,6 @@ select {
   border-radius: 5px;
 }
 
-select option {
-  padding: 10px;
-  border: 1px solid #ccc;
-  border-radius: 5px;
-  background: #009cdf;
-}
-
 .generate-quiz-form {
   display: flex;
   justify-content: center;
