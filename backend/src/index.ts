@@ -1,6 +1,6 @@
 import express, { raw } from 'express';
 import cors from 'cors';
-import dotenv from 'dotenv';
+import * as dotenv from 'dotenv';
 import router from './routes/articleRoute.js';
 
 const app = express();
