@@ -13,7 +13,7 @@ function Form({setQuizData, setLoading}: FormProps): React.JSX.Element {
 
   async function generateQuizAI(text: string): Promise<QuizQuestion[] | undefined> { 
     try {
-      let response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/generate-quiz`, {text: text})
+      let response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/generate-quiz`, {text: text})
       if (response.status === 200) {
         return response.data as QuizQuestion[];
       }
@@ -26,7 +26,7 @@ function Form({setQuizData, setLoading}: FormProps): React.JSX.Element {
   async function handleInput(input: string){
     if (inputType === "url" && input) {
       try {
-        let response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/get-article`, {
+        let response = await axios.post(`${import.meta.env.VITE_BACKEND_URL}/api/extract-article`, {
             url: input,
         })
         if (response.status === 200) {
