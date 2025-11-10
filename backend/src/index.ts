@@ -17,11 +17,7 @@ app.use(
 );
 app.use(express.json());
 
-router.get("/", async (req, res) => {
-  res.status(200).send("API is running :)");
-});
-
-app.use("/api", router);
+app.use(router);
 
 // connect to MongoDB and start the server
 mongoose
@@ -36,7 +32,4 @@ mongoose
     console.error(error);
   });
 
-// handler for Vercel to detect the Express app as a serverless function
-const handler = (req, res) => app(req, res);
-
-export default handler;
+export default app;

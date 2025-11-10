@@ -5,6 +5,11 @@ import {Article} from "../models/articleModel.js"
 
 const router = express.Router();
 
+// Health check endpoint
+router.get("/", async (req, res) => {
+  res.status(200).send("API is running :)");
+});
+
 // Extract article text from URL
 router.post("/extract-article", async (req, res) => {
   const { url } = req.body;
