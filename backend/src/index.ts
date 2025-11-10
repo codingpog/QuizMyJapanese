@@ -18,7 +18,7 @@ app.use(
 app.use(express.json());
 
 router.get("/", async (req, res) => {
-  res.status(200).send("API is running");
+  res.status(200).send("API is running :)");
 });
 
 app.use("/api", router);
