@@ -32,4 +32,7 @@ mongoose
     console.error(error);
   });
 
-export default app;
+// Export the Express app as a Vercel serverless function
+const handler = (req, res) => app(req, res);
+export default handler;
+
