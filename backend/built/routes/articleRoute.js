@@ -7,34 +7,39 @@ var __awaiter = (this && this.__awaiter) || function (thisArg, _arguments, P, ge
         step((generator = generator.apply(thisArg, _arguments || [])).next());
     });
 };
-import express from 'express';
-import { extract } from '@extractus/article-extractor';
+import express from "express";
+import { extract } from "@extractus/article-extractor";
 import OpenAI from "openai";
+import { Article } from "../models/articleModel.js";
 const router = express.Router();
-router.post('/extract-article', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// Extract article text from URL
+router.post("/extract-article", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     const { url } = req.body;
     let articleText = "";
     try {
         const article = yield extract(url);
         if (!article || !article.content) {
-            return res.status(400).send('Could not extract article from URL');
+            return res.status(400).send("Could not extract article from URL");
         }
-        const content = article.content.replace(/<[^>]*>/g, "").trim(); /*remove all html elements from article.content */
+        const content = article.content
+            .replace(/<[^>]*>/g, "")
+            .trim(); /*remove all html elements from article.content */
         articleText = content.slice(0, 6000); /*limit to first 6000 characters*/
         res.status(200).send({
             title: article.title,
-            text: articleText
+            text: articleText,
         });
     }
     catch (error) {
-        console.error('Error extracting article:', error);
-        if (error.message.includes('ENOTFOUND')) {
-            return res.status(400).send('Invalid URL or unable to reach the website');
+        console.error("Error extracting article:", error);
+        if (error.message.includes("ENOTFOUND")) {
+            return res.status(400).send("Invalid URL or unable to reach the website");
         }
-        res.status(500).send('Internal Server Error');
+        res.status(500).send("Internal Server Error");
     }
 }));
-router.post('/generate-quiz', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+// Generate quiz based on article text
+router.post("/generate-quiz", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
     try {
         /*Open connection to OpenAI*/
         const openai = new OpenAI({
@@ -71,12 +76,73 @@ router.post('/generate-quiz', (req, res) => __awaiter(void 0, void 0, void 0, fu
         }
     }
     catch (error) {
-        res.status(500).send('Error getting AI response');
-        console.error('Error parsing AI response:', error);
+        res.status(500).send("Error getting AI response");
+        console.error("Error parsing AI response:", error);
     }
 }));
-router.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
-    res.status(200).send('API is running');
+// Save inputted article with generated quiz to database
+router.post("/save-article", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { title, content, quiz } = req.body;
+        if (!title || !content || !quiz) {
+            return res.status(400).send("Missing required fields");
+        }
+        const newArticle = {
+            title,
+            content,
+            quiz
+        };
+        const savedArticle = yield Article.create(newArticle);
+        return res.status(201).send(savedArticle);
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ error: error.message });
+    }
+}));
+// Get all saved articles
+router.get("/all-articles", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const articles = yield Article.find({});
+        return res.status(200).send({
+            count: articles.length,
+            articles: articles
+        });
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ error: error.message });
+    }
+}));
+// Get a single artice
+router.get("/article/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const article = yield Article.findById(id);
+        if (!article) {
+            return res.status(404).send("Article not found");
+        }
+        return res.status(200).send(article);
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ error: error.message });
+    }
+}));
+// Delete an article
+router.delete("/delete-article/:id", (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    try {
+        const { id } = req.params;
+        const result = yield Article.findByIdAndDelete(id);
+        if (!result) {
+            return res.status(404).send("Article not found");
+        }
+        return res.status(200).send("Article deleted successfully");
+    }
+    catch (error) {
+        console.log(error.message);
+        return res.status(500).send({ error: error.message });
+    }
 }));
 export default router;
 //# sourceMappingURL=articleRoute.js.map
