@@ -36,4 +36,7 @@ mongoose
     console.error(error);
   });
 
-export default app;
+// handler for Vercel to detect the Express app as a serverless function
+const handler = (req, res) => app(req, res);
+
+export default handler;
