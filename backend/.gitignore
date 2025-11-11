@@ -23,7 +23,7 @@ pids
 
 # Build output
 dist/
-# build/
+build/
 .cache/
 
 # Coverage directory (for testing tools like Jest)
