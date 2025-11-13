@@ -1,5 +1,5 @@
 import appLogo from "../assets/appLogo.png";
-import { Link, useNavigate } from "react-router-dom";
+import { Link } from "react-router-dom";
 
 function Header(): React.JSX.Element {
   // const navigate = useNavigate();

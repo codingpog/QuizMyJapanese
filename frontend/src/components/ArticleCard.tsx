@@ -1,11 +1,10 @@
 import React, { useState } from "react";
-import Header from "./Header";
-import type { QuizQuestion } from "../types";
+//import type { QuizQuestion } from "../types";
 
 function ArticleCard({ article }: any): React.JSX.Element {
-  const [title, setTitle] = useState<string>(article.title);
-  const [content, setContent] = useState<string>(article.content);
-  const [quiz, setQuiz] = useState<QuizQuestion[]>(article.quiz);
+  const [title, _setTitle] = useState<string>(article.title);
+  const [content, _setContent] = useState<string>(article.content);
+  //const [quiz, setQuiz] = useState<QuizQuestion[]>(article.quiz);
   return (
     <div className="article-card">
       <h2>{title}</h2>
