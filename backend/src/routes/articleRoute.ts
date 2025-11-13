@@ -1,7 +1,7 @@
 import express from "express";
 import { extract } from "@extractus/article-extractor";
 import OpenAI from "openai";
-import {Article} from "../models/articleModel.js"
+import { Article } from "../models/articleModel.js";
 
 const router = express.Router();
 
@@ -83,67 +83,67 @@ router.post("/generate-quiz", async (req, res) => {
 
 // Save inputted article with generated quiz to database
 router.post("/save-article", async (req, res) => {
-    try{
-        const {title, content, quiz} = req.body;
-        if (!title || !content || !quiz) {
-            return res.status(400).send("Missing required fields");
-        }
-        const newArticle = {
-            title,
-            content,
-            quiz
-        };
-        const savedArticle = await Article.create(newArticle);
-        return res.status(201).send(savedArticle);
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).send({error: error.message});
+  try {
+    const { title, content, quiz } = req.body;
+    if (!title || !content || !quiz) {
+      return res.status(400).send("Missing required fields");
     }
-})
+    const newArticle = {
+      title,
+      content,
+      quiz,
+    };
+    const savedArticle = await Article.create(newArticle);
+    return res.status(201).send(savedArticle);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ error: error.message });
+  }
+});
 
 // Get all saved articles
 router.get("/all-articles", async (req, res) => {
-    try {
-        const articles = await Article.find({});
+  try {
+    const articles = await Article.find({});
 
-        return res.status(200).send({
-            count: articles.length,
-            articles: articles
-        });
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).send({error: error.message});
-    }
+    return res.status(200).send({
+      count: articles.length,
+      articles: articles,
+    });
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ error: error.message });
+  }
 });
 
 // Get a single artice
 router.get("/article/:id", async (req, res) => {
-    try{
-        const {id} = req.params;
-        const article = await Article.findById(id);
-        if (!article){
-            return res.status(404).send("Article not found");
-        }
-        return res.status(200).send(article);
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).send({error: error.message});
+  try {
+    const { id } = req.params;
+    const article = await Article.findById(id);
+    if (!article) {
+      return res.status(404).send("Article not found");
     }
-})
+    return res.status(200).send(article);
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ error: error.message });
+  }
+});
 
 // Delete an article
 router.delete("/delete-article/:id", async (req, res) => {
-    try {
-        const {id} = req.params;
-        const result = await Article.findByIdAndDelete(id);
-        if (!result){
-            return res.status(404).send("Article not found");
-        }
-        return res.status(200).send("Article deleted successfully");
-    } catch (error) {
-        console.log(error.message);
-        return res.status(500).send({error: error.message});
+  try {
+    const { id } = req.params;
+    const result = await Article.findByIdAndDelete(id);
+    if (!result) {
+      return res.status(404).send("Article not found");
     }
-})
+    return res.status(200).send("Article deleted successfully");
+  } catch (error) {
+    console.log(error.message);
+    return res.status(500).send({ error: error.message });
+  }
+});
 
 export default router;

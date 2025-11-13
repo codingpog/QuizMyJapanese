@@ -4,20 +4,23 @@ import OpenAI from "openai";
 
 const openai: OpenAI = new OpenAI({
   baseURL: import.meta.env.VITE_API_URL,
-  apiKey: import.meta.env.VITE_API_KEY, 
+  apiKey: import.meta.env.VITE_API_KEY,
   dangerouslyAllowBrowser: true,
 });
 
-export async function generateQuiz(text: string): Promise<QuizQuestion[] | undefined> {
+export async function generateQuiz(
+  text: string
+): Promise<QuizQuestion[] | undefined> {
   const completion = await openai.chat.completions.create({
     messages: [
-        {
-            role: "system",
-            content: "You are a helpful assistant that generates quizzes based on the provided text.",
-        },
-        {
-            role: "user",
-            content: `
+      {
+        role: "system",
+        content:
+          "You are a helpful assistant that generates quizzes based on the provided text.",
+      },
+      {
+        role: "user",
+        content: `
     Here is a passage of text:
     
     ${text}
@@ -27,19 +30,19 @@ export async function generateQuiz(text: string): Promise<QuizQuestion[] | undef
     - Three distractor answers
     - Format: return ONLY a JSON array of 5 objects with "id", "question", "options", and "answer" fields. Do not wrap it in an object. Only return valid JSON.
             `.trim(),
-          },
-        ],
+      },
+    ],
     response_format: { type: "json_object" },
     model: "deepseek-chat",
   });
 
-  const rawJSON: string | null =  completion.choices[0].message.content;
+  const rawJSON: string | null = completion.choices[0].message.content;
 
   try {
     if (rawJSON) {
-        console.log("Raw JSON response:", rawJSON);
-        const quiz = JSON.parse(rawJSON);
-        return quiz;        
+      console.log("Raw JSON response:", rawJSON);
+      const quiz = JSON.parse(rawJSON);
+      return quiz;
     }
   } catch (error) {
     console.error("Error parsing JSON:", error);

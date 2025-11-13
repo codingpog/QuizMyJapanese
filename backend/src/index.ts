@@ -24,16 +24,13 @@ mongoose
   .connect(process.env.MONGODB_URI)
   .then(() => {
     console.log("Connected to MongoDB");
-    // app.listen(PORT, () => {
-    //   console.log(`Server listening on port ${PORT}`);
-    // });
+    app.listen(PORT, () => {
+      console.log(`Server listening on port ${PORT}`);
+    });
   })
   .catch((error) => {
     console.error(error);
   });
 
 // Export the Express app as a Vercel serverless function
-// const handler = (req, res) => app(req, res);
-// export default handler;
-export default app;
-
+// export default app;

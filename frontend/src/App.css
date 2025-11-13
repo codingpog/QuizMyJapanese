@@ -9,7 +9,8 @@ a:hover {
 
 header {
   height: 90px;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   display: flex;
   justify-content: space-between;
 }
@@ -19,25 +20,25 @@ header {
   justify-content: left;
   align-items: center;
   height: 100%;
-  text-decoration: none;  /* no underline */
-  color: inherit;   /* no purple color */
+  text-decoration: none; /* no underline */
+  color: inherit; /* no purple color */
 }
 
 .logo:hover {
   text-decoration: none;
 }
 
-.logo>img {
+.logo > img {
   width: 70px;
   margin-right: 10px;
 }
 
-.logo>h2 {
+.logo > h2 {
   font-weight: 400;
 }
 
 header nav {
-  display:flex;
+  display: flex;
   justify-content: right;
   align-items: center;
   margin-right: 20px;
@@ -107,7 +108,7 @@ select {
 }
 
 .quiz-app button.correct {
-  background-color: #4CAF50;
+  background-color: #4caf50;
   color: white;
 }
 
@@ -133,7 +134,8 @@ select {
   justify-content: center;
   align-items: center;
   flex-direction: column;
-  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.10), 0px 1px 2px 0px rgba(0, 0, 0, 0.06);
+  box-shadow: 0px 1px 3px 0px rgba(0, 0, 0, 0.1),
+    0px 1px 2px 0px rgba(0, 0, 0, 0.06);
   height: 300px;
   width: 300px;
   background: #ffffff;
@@ -151,23 +153,59 @@ select {
 }
 
 .centered-container {
-    display: flex;
-    justify-content: center;
-    /* center horizontally */
-    align-items: center;
-    /* center vertically */
-    height: 100vh;
-    /* full viewport height */
-    margin: 0;
-    /* remove default spacing */
-    background: #f5f7fa;
+  display: flex;
+  justify-content: center;
+  /* center horizontally */
+  align-items: center;
+  /* center vertically */
+  height: 100vh;
+  /* full viewport height */
+  margin: 0;
+  /* remove default spacing */
+  background: #f5f7fa;
 }
 
 .about {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: column;
-    padding-left: 20vw;
-    padding-right: 20vw;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  flex-direction: column;
+  padding-left: 20vw;
+  padding-right: 20vw;
+}
+
+/* Article Card and Table */
+.article-table {
+  display: flex;
+  flex-wrap: wrap; /* Allow cards to go to next line */
+  justify-content: space-between; /* Space between cards */
+  align-items: stretch; /* Make cards the same height */
+  gap: 15px; /* Space between cards */
+}
+
+.article-card {
+  background-color: #f7fafb; /* Light teal for card background */
+  border: 2px solid #d3edee; /* Light teal border */
+  border-radius: 10px;
+  flex: 1 200px; /* flexibly grow, min width 200px */
+  padding: 20px;
+  text-align: left;
+  transition: transform 0.3s, box-shadow 0.3s; /* Smooth animation for hover */
+  cursor: pointer;
+}
+
+.article-card:hover {
+  transform: translateY(-5px); /* Lifts the card slightly */
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.2); /* Emphasized shadow on hover */
+}
+
+.article-card h2 {
+  font-size: 16px;
+  color: #905aa6; /* Purple for card titles */
+  margin-bottom: 10px;
+}
+
+.article-card p {
+  font-size: 14px;
+  color: #55565a; /* Cool gray for text */
 }
