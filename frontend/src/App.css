@@ -78,13 +78,33 @@ select {
   flex-grow: 1;
 }
 
-.generate-quiz-form button {
+/* Style for different buttons */
+.submit-button {
   padding: 10px 20px;
+  margin-right: 20px;
   border: none;
   border-radius: 5px;
   background-color: #009cdf;
   color: white;
   cursor: pointer;
+}
+
+.submit-button:hover {
+  background-color: #007bb5;
+}
+
+.delete-button {
+  padding: 10px 20px;
+  margin-right: 20px;
+  border: none;
+  border-radius: 5px;
+  background-color: #c70000;
+  color: white;
+  cursor: pointer;
+}
+
+.delete-button:hover {
+  background-color: #a30000;
 }
 
 .quiz-app {

@@ -23,7 +23,9 @@ function Header(): React.JSX.Element {
         <p> | </p>
         <Link to="/about">About</Link>
         <p> | </p>
-        <Link to="/my-articles">Articles</Link>
+        <Link to="/my-articles" onClick={window.location.reload}>
+          Articles
+        </Link>
       </nav>
     </header>
   );

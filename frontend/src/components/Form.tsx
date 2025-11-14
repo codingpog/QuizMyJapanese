@@ -104,7 +104,9 @@ function Form({ setQuizData, setLoading }: FormProps): React.JSX.Element {
         aria-label="input text or URL"
         name="input"
       />
-      <button type="submit">Quiz Me!</button>
+      <button className="submit-button" type="submit">
+        &#x270D; Quiz Me!
+      </button>
     </form>
   );
 }
