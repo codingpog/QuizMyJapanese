@@ -1,6 +1,5 @@
 import React, { useState } from "react";
 import axios from "axios";
-import { useNavigate } from "react-router-dom";
 //import type { QuizQuestion } from "../types";
 
 function ArticleCard({ article }: any): React.JSX.Element {
