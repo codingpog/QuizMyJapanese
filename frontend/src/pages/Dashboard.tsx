@@ -1,6 +1,5 @@
 import React, { useEffect } from "react";
 import type { QuizQuestion } from "../types";
-import Quiz from "../components/Quiz";
 import Form from "../components/Form";
 import Header from "../pages/Header";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
