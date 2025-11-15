@@ -1,6 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
-import ArticlesTable from "./ArticlesTable";
+import ArticlesTable from "../components/ArticlesTable";
 import Header from "./Header";
 import ClimbingBoxLoader from "react-spinners/ClimbingBoxLoader";
 
